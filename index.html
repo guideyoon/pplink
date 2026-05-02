@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>피플네트웍스</title>
+  <style>
+    :root {
+      --bg-top: #1a1c24;
+      --bg-bottom: #0f1014;
+      --shell: rgba(255, 255, 255, 0.03);
+      --hero: rgba(255, 255, 255, 0.02);
+      --card: #ffffff;
+      --card-soft: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --muted: #a0a4b8;
+      --ink: #111111;
+      --brand: #2563eb;
+      --brand-soft: #eff6ff;
+      --accent: #fbbf24;
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
+      --radius-2xl: 40px;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background-color: var(--bg-bottom);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.15), transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(251, 191, 36, 0.1), transparent 40%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+      color: var(--text);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .phone-shell {
+      width: min(100%, 460px);
+      padding: 12px;
+      border-radius: 48px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 24px 32px;
+      border-radius: var(--radius-2xl);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+      isolation: isolate;
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .badge {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 24px;
+      padding: 16px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .badge img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #ffffff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .intro {
+      max-width: 340px;
+      margin: 20px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .cta,
+    .ghost-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 52px;
+      padding: 0 24px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .cta {
+      background: #ffffff;
+      color: #000000;
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
+      background: var(--brand-soft);
+    }
+
+    .ghost-cta {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.03);
+      color: #ffffff;
+    }
+
+    .ghost-cta:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px);
+    }
+
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .meta-item {
+      padding: 16px 8px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .meta-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .meta-item span {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: 60px 1fr 20px;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card.featured {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--brand) 0%, #1e40af 100%);
+      border: none;
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+    }
+
+    .card.featured:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(37, 99, 235, 0.3);
+    }
+
+    .featured small {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .featured strong {
+      font-size: 20px;
+      line-height: 1.4;
+      font-weight: 800;
+    }
+
+    .thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .thumb-photo {
+      background: url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=300&q=80") center/cover;
+    }
+
+    .thumb-team {
+      background: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=300&q=80") center/cover;
+    }
+
+    .card-copy strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .card-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .card-arrow {
+      color: var(--muted);
+      font-size: 20px;
+      font-weight: 300;
+      text-align: right;
+    }
+
+    .bottom-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .bottom-banner:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .bottom-banner strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .bottom-banner span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .bottom-banner b {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #000000;
+      font-size: 20px;
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .phone-shell {
+        border-radius: 40px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .badge {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="phone-shell">
+    <section class="hero">
+      <div class="brand">
+        <div class="badge">
+          <img src="./logo.png" alt="피플네트웍스 로고">
+        </div>
+
+        <div class="eyebrow">ULSAN LOCAL CREATIVE PARTNER</div>
+        <h1><em>피플네트웍스</em></h1>
+        <p class="intro">지역 광고부터 소상공인 홈페이지 제작, 콘텐츠 디자인, 브랜드에 필요한 실행을 한 번에 연결합니다.</p>
+
+
+      </div>
+
+      <div class="stack" id="links">
+        <a class="card featured" href="https://ppnetworksmain.vercel.app/">
+          <small>OFFICIAL WEBSITE</small>
+          <strong>피플네트웍스 공식 홈페이지 바로가기</strong>
+        </a>
+
+        <a class="card" href="https://cafe.naver.com/ulsanin">
+          <div class="thumb" aria-hidden="true">
+            <img src="./cafe.png" alt="네이버 카페 로고">
+          </div>
+          <div class="card-copy">
+            <strong>울산 지역 커뮤니티 운영</strong>
+            <span>지역 소식, 상권 홍보, 로컬 타깃 유입 연결</span>
+          </div>
+          <div class="card-arrow">›</div>
+        </a>
+
+        <a class="card" href="https://ppnetworks.vercel.app/">
+          <div class="thumb thumb-team" aria-hidden="true"></div>
+          <div class="card-copy">
+            <strong>브랜딩 및 홈페이지 제작 패키지</strong>
+            <span>입점 제안서부터 온라인 소개 페이지, 맞춤형 웹 구축까지</span>
+          </div>
+          <div class="card-arrow">›</div>
+        </a>
+      </div>
+
+      <a class="bottom-banner" href="https://open.kakao.com/o/s83DkEwb">
+        <div>
+          <strong>프로젝트 상담 바로 시작</strong>
+          <span>편하게 문의 남겨주시면 빠르게 연락드리겠습니다.</span>
+        </div>
+        <b>›</b>
+      </a>
+    </section>
+  </main>
+</body>
+
+</html>
